@@ -2,6 +2,10 @@
 
 Este projeto utiliza modelos de Deep Learning para classificar imagens de dígitos manuscritos do dataset MNIST. A aplicação foi desenvolvida usando Flask para o backend e HTML/CSS/JavaScript para o frontend.
 
+## Video de demonstração
+
+[Video](https://drive.google.com/file/d/174s_E7TVl7LJ4Husfn1ywAB3kQoYRhYD/view?usp=sharing)
+
 ## Requisitos
 
 Antes de iniciar, você precisará ter o Python instalado em sua máquina. Além disso, as seguintes bibliotecas são necessárias:
