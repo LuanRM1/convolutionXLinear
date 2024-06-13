@@ -47,7 +47,7 @@ O projeto consiste nos seguintes arquivos principais:
    Navegue até o diretório do projeto e execute o arquivo `app.py` para iniciar o servidor:
 
    ```bash
-   python app.py
+   python3 app.py
    ```
 
    Isso iniciará o servidor Flask na porta 8000.
