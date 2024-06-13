@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload de Imagem</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      h1 {
+        color: #0056b3;
+      }
+      form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      input[type="file"],
+      select {
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        background-color: #0056b3;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #004494;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #dbf0ff;
+        border: 1px solid #bde0ff;
+        border-radius: 5px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload de Imagem para Classificação de MNIST</h1>
+    <form id="upload-form">
+      <select id="model-select">
+        <option value="predict">Modelo Convolucional</option>
+        <option value="predict_linear">Modelo Linear</option>
+      </select>
+      <input type="file" name="file" required />
+      <input type="submit" value="Classificar Imagem" />
+    </form>
+    <div id="result"></div>
+
+    <script>
+      document.getElementById("upload-form").onsubmit = function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        var modelType = document.getElementById("model-select").value;
+        var endpoint = "http://localhost:8000/" + modelType;
+        fetch(endpoint, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            var resultText = "Predição: " + data.prediction;
+            resultText +=
+              " | Tempo de inferência: " +
+              data.inference_time.toFixed(3) +
+              " segundos";
+            document.getElementById("result").textContent = resultText;
+            document.getElementById("result").style.display = "block";
+          })
+          .catch((error) => console.error("Error:", error));
+      };
+    </script>
+  </body>
+</html>
